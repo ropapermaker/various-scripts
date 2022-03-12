@@ -1,0 +1,84 @@
+#!/bin/bash
+
+FRAME_RATE="30"
+START_TIME="00:00:00"
+QUALITY="80"
+OUTPUT_GIF="out.gif"
+WIDTH="1280"
+
+show_help(){
+    echo "-h: show these options
+-i: input video
+-r: framerate, default: '30'
+-o: output gif file, default: 'out.gif'
+-s: start time, default: '00:00:00'
+-t: end time, default: end of video
+-q: quality, default: '80'
+-w: width, default: '1280'
+
+example usages:
+'videotogif.sh -i testmkv.mkv -o outgif2.gif -s 00:00:00 -t 00:00:05 -r 24'
+
+when you want to speed up the gif use smaller -r and bigger -f
+'videotogif -i fractal.mkv -o fractal_full2.gif -w 400 -r 3 -q 40 -f 50'"
+}
+
+# FLAGS
+if [[ ! $@ =~ ^\-.+ ]]
+then
+  show_help
+  exit 0
+fi
+
+while getopts 'h? i: r: o: s: t: q: w: f:' flag;
+do
+    case "${flag}" in
+        h|\?) show_help
+        exit 0;;
+        i) INPUT_VIDEO=${OPTARG};;
+        r) FRAME_RATE=${OPTARG};;
+        o) OUTPUT_GIF=${OPTARG};;
+        s) START_TIME=${OPTARG};;
+        t) END_TIME=${OPTARG};;
+        q) QUALITY=${OPTARG};;
+        w) WIDTH=${OPTARG};;
+        f) FRAME_RATE_GIF=${OPTARG};;
+    esac
+done
+if [ -z ${FRAME_RATE_GIF+x} ]; then
+    FRAME_RATE_GIF=$FRAME_RATE
+fi
+
+echo "$FRAME_RATE"
+echo "$INPUT_VIDEO"
+echo "$START_TIME"
+echo "$END_TIME"
+echo "$OUTPUT_GIF"
+mkdir -p /tmp/frames
+
+# turn video frames to png
+# if start time is not set then don't add to ffmpeg command
+if [ -z ${END_TIME+x} ];
+then
+    ffmpeg -i $INPUT_VIDEO \
+        -r $FRAME_RATE \
+        -ss $START_TIME \
+        /tmp/frames/frame%04d.png
+else
+    ffmpeg -i $INPUT_VIDEO \
+        -r $FRAME_RATE \
+        -ss $START_TIME \
+        -to $END_TIME \
+        /tmp/frames/frame%04d.png
+fi
+
+# turn pngs to gif
+# example: if video frame rate is 30 and gif framerate is greater -> the gif will be faster
+if [ "$FRAME_RATE_GIF" != "$FRAME_RATE" ];
+then
+    gifski --fps $FRAME_RATE_GIF --width $WIDTH --quality $QUALITY -o $OUTPUT_GIF /tmp/frames/frame*.png
+else
+    gifski --fps $FRAME_RATE --width $WIDTH --quality $QUALITY -o $OUTPUT_GIF /tmp/frames/frame*.png
+fi
+
+rm -rf /tmp/frames/
