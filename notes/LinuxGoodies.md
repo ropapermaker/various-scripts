@@ -139,3 +139,23 @@ layers.acceleration.force-enabled = true
 gfx.webrender.all = true
 svg.context-properties.content.enabled = true
 ```
+
+# gtk3 smaller headerbar
+
+```css
+headerbar entry,
+headerbar spinbutton,
+headerbar button,
+headerbar separator {
+    margin-top: 0px; /* same as headerbar side padding for nicer proportions */
+    margin-bottom: 0px;
+}
+
+headerbar {
+    min-height: 24px;
+    padding-left: 2px; /* same as childrens vertical margins for nicer proportions */
+    padding-right: 2px;
+    margin: 0px; /* same as headerbar side padding for nicer proportions */
+    padding: 0px;
+}
+```
