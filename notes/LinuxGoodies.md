@@ -117,6 +117,7 @@ https://bernsteinbear.com/isdt/
 
 
 # Firefox smooth scrolling
+# KDE file picker, deps: dg-desktop-portal xdg-desktop-portal-kde
 
 ```bash
 general.smoothScroll.msdPhysics.enabled = true
@@ -129,6 +130,7 @@ general.smoothScroll.msdPhysics.slowdownSpringConstant = 5000
 mousewheel.min_line_scroll_amount = 22
 toolkit.scrollbox.horizontalScrollDistance = 4
 toolkit.scrollbox.verticalScrollDistance = 5
+widget.use-xdg-desktop-portal.file-picker
 ```
 
 # SimpleFox configs
