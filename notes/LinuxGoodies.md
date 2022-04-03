@@ -120,26 +120,26 @@ https://bernsteinbear.com/isdt/
 # KDE file picker, deps: dg-desktop-portal xdg-desktop-portal-kde
 
 ```bash
-general.smoothScroll.msdPhysics.enabled = true
-general.smoothScroll.msdPhysics.continuousMotionMaxDeltaMS = 250
-general.smoothScroll.msdPhysics.motionBeginSpringConstant = 400
-general.smoothScroll.msdPhysics.regularSpringConstant = 400
-general.smoothScroll.msdPhysics.slowdownMinDeltaMS = 120
-general.smoothScroll.msdPhysics.slowdownMinDeltaRatio = 0.4
-general.smoothScroll.msdPhysics.slowdownSpringConstant = 5000
-mousewheel.min_line_scroll_amount = 22
-toolkit.scrollbox.horizontalScrollDistance = 4
-toolkit.scrollbox.verticalScrollDistance = 5
-widget.use-xdg-desktop-portal.file-picker
+user_pref("general.smoothScroll.msdPhysics.enabled",   true);
+user_pref("general.smoothScroll.msdPhysics.continuousMotionMaxDeltaMS",   250);
+user_pref("general.smoothScroll.msdPhysics.motionBeginSpringConstant",   400);
+user_pref("general.smoothScroll.msdPhysics.regularSpringConstant",   400);
+user_pref("general.smoothScroll.msdPhysics.slowdownMinDeltaMS",   120);
+user_pref("general.smoothScroll.msdPhysics.slowdownMinDeltaRatio",   0.4);
+user_pref("general.smoothScroll.msdPhysics.slowdownSpringConstant",   5000);
+user_pref("mousewheel.min_line_scroll_amount",   22);
+user_pref("toolkit.scrollbox.horizontalScrollDistance",   4);
+user_pref("toolkit.scrollbox.verticalScrollDistance",   5);
+user_pref("widget.use-xdg-desktop-portal.file-picker",   1);
 ```
 
 # SimpleFox configs
 
 ```bash
-toolkit.legacyUserProfileCustomizations.stylesheets = true
-layers.acceleration.force-enabled = true
-gfx.webrender.all = true
-svg.context-properties.content.enabled = true
+user_pref("toolkit.legacyUserProfileCustomizations.stylesheets",   true);
+user_pref("layers.acceleration.force-enabled",   true);
+user_pref("gfx.webrender.all",   true);
+user_pref("svg.context-properties.content.enabled",   true);
 ```
 
 # gtk3 smaller headerbar
